@@ -316,10 +316,10 @@ class KudosPlugin extends Gdn_Plugin {
    * @param Controller $Sender
    * @return void
    */
-  public function DiscussionController_CommentOptions_Handler($Sender) {
-    $Sender->Options .= '<span class="Kudos">';
-    $Sender->Options .= $this->FormatKudos($Sender->EventArguments['Object']->DiscussionID, $Sender->EventArguments['Object']->CommentID);
-    $Sender->Options .= '</span>';
+  public function DiscussionController_AfterReactions_Handler($Sender) {
+    if (isset($Sender->EventArguments['Comment'])) {
+      echo '<span class="Kudos">', $this->FormatKudos($Sender->EventArguments['Comment']->DiscussionID, $Sender->EventArguments['Comment']->CommentID), '</span>';
+    }
   }
 
   /**
